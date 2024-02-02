@@ -3,18 +3,18 @@
 <div class="container-fluid m-2 p-5 bg-primary text-center">
     <h1>Les Marvels</h1>
 </div>
-<div class="container m-2 p-5 bg-primary  text-center">
-    <h2>Mes comics</h2>
-    <div class="row">
-        <ul>
-            {{#each data}}
-                <li>
-                    <img src= {{ this.imageUrl }}  alt="Image du héros">
-                    <h2>{{ this.name }}</h2>
-                </li>
-            {{/each}}
-        </ul>
-    </div>
+<div class="row">
+    {{#each data}}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+
+                <img src="{{this.thumbnail.path}}.{{this.thumbnail.extension}}" class="card-img-top" alt="{{this.name}}">
+                <div class="card-body">
+                    <h5 class="card-title">{{this.name}}</h5>
+                </div>
+            </div>
+        </div>
+    {{/each}}
 </div>
 
 {{> footer}}

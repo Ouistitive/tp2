@@ -1,7 +1,10 @@
 import {createHash} from 'node:crypto'
+import dotenv from 'dotenv';
 
-const apiKey = "551b712366610f1d249ed090565efffa";
-const privateKey = "cc2ae25763b6fa37037c297f4d184a8b86675d54";
+dotenv.config();
+
+const apiKey = process.env.PUBKEY;
+const privateKey = process.env.PRIKEY;
 const ts = new Date().getTime();
 
 /**
