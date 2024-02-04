@@ -1,20 +1,23 @@
 {{> header}}
 
+<div class="text-center mt-3">
+    <a href="/?view=list" class="btn btn-primary">Vue en liste</a>
+    <a href="/?view=card" class="btn btn-primary">Vue en carte</a>
+</div>
+
 <div class="container-fluid m-2 p-5 bg-primary text-center">
     <h1>Les Marvels</h1>
 </div>
 <div class="row">
-    {{#each data}}
-        <div class="col-md-4 mb-4">
-            <div class="card">
-
-                <img src="{{this.thumbnail.path}}.{{this.thumbnail.extension}}" class="card-img-top" alt="{{this.name}}">
-                <div class="card-body">
-                    <h5 class="card-title">{{this.name}}</h5>
-                </div>
-            </div>
-        </div>
-    {{/each}}
+    {{# if (eq viewType 'list') }}
+        {{#each data}}
+            {{> li character=this }}
+        {{/each}}
+    {{ else }}
+        {{#each data}}
+            {{> cards character=this }}
+        {{/each}}
+    {{/if }}
 </div>
 
 {{> footer}}

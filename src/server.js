@@ -4,6 +4,9 @@ import path from "path";
 import fastifyView from '@fastify/view';
 import handlebars from 'handlebars';
 import {getData} from "./api.js";
+import handlebarsHelpers from 'handlebars-helpers';
+
+handlebarsHelpers({ handlebars: handlebars });
 
 const __dirname = path.resolve();
 
@@ -17,7 +20,9 @@ app.register(fastifyView, {
     options: {
         partials: {
             header: path.join('header.hbs'),
-            footer: path.join('footer.hbs')
+            footer: path.join('footer.hbs'),
+            cards: path.join('cards.hbs'),
+            li: path.join('li.hbs')
         }
     }
 });
@@ -32,7 +37,8 @@ app.get('/', (req, res) => {
 
     getData("https://gateway.marvel.com:443/v1/public/characters")
         .then(data => {
-            res.view("index.hbs", { data });
+            const viewType = req.query.view || 'card';
+            res.view("index.hbs", { data: data, viewType: viewType});
         })
         .catch(err => {
             console.error("Erreur lors de la récupération des données :", err);
